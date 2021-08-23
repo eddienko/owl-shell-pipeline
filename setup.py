@@ -36,7 +36,7 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://eddienko.github.com/owl-shell-pipeline",
-    version="0.1.4",
+    version="0.2.0",
     zip_safe=False,
     python_requires=">=3.7",
 )
