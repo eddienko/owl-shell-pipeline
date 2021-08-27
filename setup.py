@@ -6,6 +6,7 @@ requirements = [
     "dask",
     "distributed",
     "owl-pipeline-develop",
+    "owl-pipeline-develop @ git+https://github.com/eddienko/owl-pipeline-develop.git#egg=owl-pipeline-develop",
 ]
 
 setup_requirements = ["pytest-runner", "flake8"]
