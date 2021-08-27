@@ -31,6 +31,11 @@ An example pipeline definition file is:
       echo "Hello"
       sleep 300
 
+    # output directory (optional)
+    # - sets the directory where the script is run
+    # - stores pipeline logs
+    # output: /storage/user/output
+
     resources:
       cores: 1
       workers: 1

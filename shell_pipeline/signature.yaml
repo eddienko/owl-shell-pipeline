@@ -14,8 +14,12 @@ command: |
 # use dask (optional, see docs)
 # use_dask: false
 
+# output directory (optional)
+# - sets the directory where the script is run
+# - stores pipeline logs
+# output: /storage/user/output
+
 resources:
   workers: 1
-  memory: 8
+  memory: 1
   cores: 1
-
