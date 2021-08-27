@@ -40,7 +40,7 @@ def main(
         env = {"DASK_SCHEDULER_ADDRESS": scheduler}
         res = run_command(command, env=env, cwd=output)
     else:
-        with dask.annotate(retries=2):
+        with dask.annotate(executor="processes", retries=2):
             fut = client.submit(run_command, command, cwd=output)
         res = client.gather(fut)
 
