@@ -5,9 +5,6 @@ sig:active: true
 
 name: shell
 
-# Directory where the command is writing data to (optional)
-# output: /tmp/output
-
 command: |
   sleep 300
 
