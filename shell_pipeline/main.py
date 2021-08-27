@@ -27,7 +27,7 @@ def run_command(command, env=None, cwd=None):
     return res
 
 
-@pipeline()
+@pipeline
 def main(
     *, command: str, use_dask: bool, output: Path = None, **kwargs,
 ):
