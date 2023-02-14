@@ -29,19 +29,22 @@ def run_command(command, env=None, cwd=None):
 
 @pipeline
 def main(
-    *, command: str, use_dask: bool, output: Path = None, **kwargs,
+    *, command: str, use_dask: bool, input_path: Path = None, output_path: Path = None, **kwargs,
 ):
     logger.info("Pipeline started")
     client: Client = Client.current()
+
+    if output_path is None:
+        output_path = str(Path("~").expanduser())
 
     if use_dask:
         scheduler = client._scheduler_identity["address"]
         logger.info("Using Dask scheduler at %s", scheduler)
         env = {"DASK_SCHEDULER_ADDRESS": scheduler}
-        res = run_command(command, env=env, cwd=output)
+        res = run_command(command, env=env, cwd=output_path)
     else:
         with dask.annotate(executor="processes", retries=2):
-            fut = client.submit(run_command, command, cwd=output)
+            fut = client.submit(run_command, command, cwd=output_path)
         res = client.gather(fut)
 
     if res.returncode == 0:
