@@ -8,11 +8,16 @@ from owl_dev import pipeline
 from owl_dev.logging import logger
 
 CMD_SCRIPT = "/tmp/cmd.sh"
+CMD_TEMPLATE = """#!/bin/bash
+set -e
+
+{command}
+"""
 
 
 def run_command(command, env=None, cwd=None):
     with open(CMD_SCRIPT, "w") as fh:
-        fh.write(command)
+        fh.write(CMD_TEMPLATE.format(command=command))
     os.chmod(CMD_SCRIPT, 0o744)
 
     res = subprocess.run(
@@ -29,7 +34,12 @@ def run_command(command, env=None, cwd=None):
 
 @pipeline
 def main(
-    *, command: str, use_dask: bool, input_path: Path = None, output_path: Path = None, **kwargs,
+    *,
+    command: str,
+    use_dask: bool,
+    input_path: Path = None,
+    output_path: Path = None,
+    **kwargs,
 ):
     logger.info("Pipeline started")
     client: Client = Client.current()
